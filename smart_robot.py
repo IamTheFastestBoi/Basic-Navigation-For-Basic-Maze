@@ -44,16 +44,13 @@ class Smart_Rover:
 import random
 
 def generate_hardcore_map(height=40, width=80):
-    # Yükseklik (satır) ve genişlik (sütun) olarak haritayı oluştur
     city = [[0 for _ in range(width)] for _ in range(height)]
     
-    # %35 ihtimalle engeller (1) at
     for r in range(height):
         for c in range(width):
             if random.random() < 0.35:
                 city[r][c] = 1
                 
-    # Garanti yol kazısı (Hedefe kesin ulaşım)
     curr_r, curr_c = 0, 0
     while (curr_r, curr_c) != (height-1, width-1):
         city[curr_r][curr_c] = 0
@@ -63,13 +60,11 @@ def generate_hardcore_map(height=40, width=80):
         elif curr_r < height-1: curr_r += 1
         elif curr_c < width-1: curr_c += 1
     
-    # Başlangıç ve Bitiş
+
     city[0][0] = 0
     city[height-1][width-1] = 2
     return city
 
-# Monitöründe en kare duracak oranı bulana kadar bu sayıları değiştirebilirsin:
-# Örneğin: Yükseklik 40, Genişlik 80
 map = generate_hardcore_map(height=40, width=80)
 
 my_rover = Smart_Rover(name= "Smart Rover", map=map, current_position=(0, 0))
